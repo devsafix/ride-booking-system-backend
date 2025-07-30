@@ -23,4 +23,20 @@ const blockUser = async (userId: string) => {
   return user;
 };
 
-export const UserServices = { getAllUsers, blockUser };
+const unblockUser = async (userId: string) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "User not found");
+  }
+
+  if (!user.isBlocked) {
+    throw new AppError(httpStatus.BAD_REQUEST, "User is not blocked");
+  }
+
+  user.isBlocked = false;
+  await user.save();
+
+  return user;
+};
+
+export const UserServices = { getAllUsers, blockUser, unblockUser };
