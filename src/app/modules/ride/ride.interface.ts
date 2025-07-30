@@ -10,7 +10,7 @@ export enum RideStatus {
   REJECTED = "rejected",
 }
 
-export interface TRide {
+export interface IRide {
   rider: Types.ObjectId;
   driver?: Types.ObjectId;
   pickupLocation: string;
