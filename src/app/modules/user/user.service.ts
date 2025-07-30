@@ -39,4 +39,29 @@ const unblockUser = async (userId: string) => {
   return user;
 };
 
-export const UserServices = { getAllUsers, blockUser, unblockUser };
+const approveDriver = async (userId: string) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw new AppError(httpStatus.NOT_FOUND, "Driver not found");
+  }
+
+  if (user.role !== "driver") {
+    throw new AppError(httpStatus.BAD_REQUEST, "User is not a driver");
+  }
+
+  if (user.isApproved) {
+    throw new AppError(httpStatus.BAD_REQUEST, "Driver is already approved");
+  }
+
+  user.isApproved = true;
+  await user.save();
+
+  return user;
+};
+
+export const UserServices = {
+  getAllUsers,
+  blockUser,
+  unblockUser,
+  approveDriver,
+};
