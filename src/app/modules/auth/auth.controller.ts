@@ -12,4 +12,4 @@ const login = async (req: Request, res: Response) => {
   res.status(200).json({ success: true, data: result });
 };
 
-export const AuthController = { register, login };
+export const AuthControllers = { register, login };
