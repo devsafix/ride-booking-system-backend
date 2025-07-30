@@ -22,5 +22,23 @@ const registerUser = async (payload: {
   };
 };
 
+const loginUser = async (email: string, password: string) => {
+  const user = await User.findOne({ email });
+  if (!user || user.isBlocked) throw new Error("User not found or blocked");
 
-export const AuthServices = { registerUser };
+  const isPasswordValid = await BcryptHelper.comparePassword(
+    password,
+    user.password
+  );
+  if (!isPasswordValid) throw new Error("Invalid password");
+
+  const accessToken = generateToken(
+    { id: user._id, role: user.role },
+    envVariables.JWT_ACCESS_SECRET,
+    envVariables.JWT_ACCESS_EXPIRES
+  );
+
+  return { accessToken, user };
+};
+
+export const AuthServices = { registerUser, loginUser };
