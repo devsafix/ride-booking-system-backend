@@ -1,7 +1,9 @@
 import { envVariables } from "../../config/env";
+import AppError from "../../errorHelpers/AppError";
 import { BcryptHelper } from "../../utils/bcrypt";
 import { generateToken } from "../../utils/jwt";
 import { User } from "../user/user.model";
+import httpStatus from "http-status-codes";
 
 const registerUser = async (payload: {
   name: string;
@@ -10,7 +12,8 @@ const registerUser = async (payload: {
   role: string;
 }) => {
   const existingUser = await User.findOne({ email: payload.email });
-  if (existingUser) throw new Error("Email already exists");
+  if (existingUser)
+    throw new AppError(httpStatus.BAD_REQUEST, "Email already exists");
 
   const user = new User(payload);
   await user.save();
@@ -30,7 +33,8 @@ const loginUser = async (email: string, password: string) => {
     password,
     user.password
   );
-  if (!isPasswordValid) throw new Error("Invalid password");
+  if (!isPasswordValid)
+    throw new AppError(httpStatus.BAD_REQUEST, "Invalid password");
 
   const accessToken = generateToken(
     { id: user._id, role: user.role },

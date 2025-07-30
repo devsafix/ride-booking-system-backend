@@ -6,12 +6,12 @@ import httpStatus from "http-status-codes";
 import { Types } from "mongoose";
 import { calculateFare } from "../../utils/calculateFare";
 
-export const createRide = async (rideData: IRide) => {
+const createRide = async (rideData: IRide) => {
   const ride = await Ride.create(rideData);
   return ride;
 };
 
-export const getMyRides = async (userId: string, role: string) => {
+const getMyRides = async (userId: string, role: string) => {
   const filter: any = {};
   if (role === "rider") filter.rider = userId;
   else if (role === "driver") filter.driver = userId;
@@ -20,7 +20,7 @@ export const getMyRides = async (userId: string, role: string) => {
   return rides;
 };
 
-export const updateRideStatus = async (
+const updateRideStatus = async (
   rideId: string,
   status: RideStatus,
   driverId?: string
@@ -43,7 +43,7 @@ export const updateRideStatus = async (
   return ride;
 };
 
-export const assignDriverToRide = async (rideId: string, driverId: string) => {
+const assignDriverToRide = async (rideId: string, driverId: string) => {
   const ride = await Ride.findById(rideId);
   if (!ride) throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
 
@@ -59,4 +59,11 @@ export const assignDriverToRide = async (rideId: string, driverId: string) => {
 
   await ride.save();
   return ride;
+};
+
+export const RideServices = {
+  createRide,
+  getMyRides,
+  updateRideStatus,
+  assignDriverToRide,
 };

@@ -1,11 +1,13 @@
+/* eslint-disable no-console */
 import mongoose from "mongoose";
 import app from "./app";
 import { Server } from "http";
 import { envVariables } from "./app/config/env";
+import { seedSuperAdmin } from "./app/utils/seedAdmin";
 
 let server: Server;
 
-const startServer = async () => {
+async function startServer() {
   try {
     await mongoose.connect(envVariables.DATABASE_URL);
     console.log(`Connected to MongoDB`);
@@ -16,6 +18,38 @@ const startServer = async () => {
   } catch (err) {
     console.error("❌ Failed to start server:", err);
   }
-};
+}
 
-startServer();
+(async () => {
+  await startServer();
+  await seedSuperAdmin();
+})();
+
+process.on("unhandledRejection", (err) => {
+  console.log("Unhandled Rejection Detected. Server Shutting Down ...", err);
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  }
+  process.exit(1);
+});
+
+process.on("uncaughtException", (err) => {
+  console.log("Uncaught Exception Detected. Server Shutting Down ...", err);
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  }
+  process.exit(1);
+});
+
+process.on("SIGTERM", () => {
+  if (server) {
+    server.close(() => {
+      process.exit(1);
+    });
+  }
+  process.exit(1);
+});

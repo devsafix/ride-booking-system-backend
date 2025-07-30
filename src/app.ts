@@ -3,6 +3,8 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { envVariables } from "./app/config/env";
 import { router } from "./app/routes";
+import { globalErrorHandler } from "./app/middlewares/globalErrorHandler";
+import notFound from "./app/middlewares/notFound";
 
 const app: Application = express();
 
@@ -20,5 +22,8 @@ app.get("/", (req: Request, res: Response) => {
     .status(200)
     .json({ status: "OK", message: "Ride Booking API is working." });
 });
+
+app.use(globalErrorHandler);
+app.use(notFound);
 
 export default app;
