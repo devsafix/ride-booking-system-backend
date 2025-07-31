@@ -12,8 +12,9 @@ const registerUser = async (payload: {
   role: string;
 }) => {
   const existingUser = await User.findOne({ email: payload.email });
-  if (existingUser)
+  if (existingUser) {
     throw new AppError(httpStatus.BAD_REQUEST, "Email already exists");
+  }
 
   const user = new User(payload);
   await user.save();
@@ -26,21 +27,30 @@ const registerUser = async (payload: {
 };
 
 const loginUser = async (email: string, password: string) => {
-  const user = await User.findOne({ email });
-  if (!user || user.isBlocked) throw new Error("User not found or blocked");
+  // Explicitly select the password field for this query only
+  const user = await User.findOne({ email }).select("+password");
+
+  if (!user || user.isBlocked) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "User not found or blocked");
+  }
 
   const isPasswordValid = await BcryptHelper.comparePassword(
     password,
-    user.password
+    user.password as string
   );
-  if (!isPasswordValid)
-    throw new AppError(httpStatus.BAD_REQUEST, "Invalid password");
+
+  if (!isPasswordValid) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "Invalid password");
+  }
 
   const accessToken = generateToken(
     { id: user._id, role: user.role },
     envVariables.JWT_ACCESS_SECRET,
     envVariables.JWT_ACCESS_EXPIRES
   );
+
+  // Return the user object without the password
+  user.password = undefined;
 
   return { accessToken, user };
 };

@@ -17,10 +17,17 @@ const blockUser = async (userId: string) => {
     throw new AppError(httpStatus.BAD_REQUEST, "User is already blocked");
   }
 
-  user.isBlocked = true;
-  await user.save();
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    { isBlocked: true },
+    { new: true, runValidators: true }
+  ).select("-password");
 
-  return user;
+  if (!updatedUser) {
+    throw new AppError(httpStatus.NOT_FOUND, "Failed to block user");
+  }
+
+  return updatedUser;
 };
 
 const unblockUser = async (userId: string) => {
@@ -70,7 +77,10 @@ const suspendDriver = async (userId: string) => {
   }
 
   if (!user.isApproved) {
-    throw new AppError(httpStatus.BAD_REQUEST, "Driver is already suspended");
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "Driver is not approved and cannot be suspended"
+    );
   }
 
   user.isApproved = false;
