@@ -1,4 +1,3 @@
-
 # Ride Booking API
 
 ## Project Overview
@@ -10,29 +9,35 @@ This is a robust and scalable backend API for a ride-booking service, similar to
 ## Key Features
 
 - **Authentication & Authorization**
+
   - Secure JWT-based authentication
   - Password hashing using bcrypt
   - Role-based access control middleware
 
 - **Ride Management**
+
   - Full ride lifecycle management with status transitions:
     - `requested → accepted → in_transit → completed`
 
 - **Driver Logic**
+
   - Toggle availability status (Online/Offline)
   - Accept or reject ride requests
   - View earnings from completed rides
 
 - **Rider Logic**
+
   - Request and cancel rides
   - View ride history
 
 - **Admin Tools**
+
   - Manage all user accounts
   - Approve/Suspend drivers
   - Generate system-wide reports
 
 - **Modular Architecture**
+
   - Well-structured codebase: `auth`, `user`, `driver`, `ride`
 
 - **Fare Calculation**
@@ -42,13 +47,13 @@ This is a robust and scalable backend API for a ride-booking service, similar to
 
 ## Technology Stack
 
-| Category         | Tech                  |
-|------------------|------------------------|
-| Backend Runtime  | Node.js                |
-| Web Framework    | Express.js             |
-| Database         | MongoDB + Mongoose     |
-| Authentication   | JWT + bcrypt.js        |
-| Validation       | Zod                    |
+| Category        | Tech               |
+| --------------- | ------------------ |
+| Backend Runtime | Node.js            |
+| Web Framework   | Express.js         |
+| Database        | MongoDB + Mongoose |
+| Authentication  | JWT + bcrypt.js    |
+| Validation      | Zod                |
 
 ---
 
@@ -59,7 +64,7 @@ This is a robust and scalable backend API for a ride-booking service, similar to
 ```bash
 git clone https://github.com/devsafix/ride-booking-system-backend
 cd ride-booking-system-backend
-````
+```
 
 ### 2. Install Dependencies
 
@@ -158,8 +163,8 @@ npm start
 
 ## Testing
 
-* You can use tools like **Postman** or **Thunder Client** to test the endpoints.
-* Make sure MongoDB is running locally or use a cloud service like MongoDB Atlas.
+- You can use tools like **Postman** or **Thunder Client** to test the endpoints.
+- Make sure MongoDB is running locally or use a cloud service like MongoDB Atlas.
 
 ---
 
