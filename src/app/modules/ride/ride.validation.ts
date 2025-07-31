@@ -1,25 +1,20 @@
 import { z } from "zod";
 import { RideStatus } from "./ride.interface";
 
+// Zod schema for a location object
+const locationSchema = z.object({
+  latitude: z.number(),
+  longitude: z.number(),
+  address: z.string().optional(),
+});
+
 export const createRideZodSchema = z.object({
-  rider: z.string().optional(),
-
-  pickupLocation: z
-    .string()
-    .min(2, "Pickup location must be at least 2 characters long"),
-
-  dropOffLocation: z
-    .string()
-    .min(2, "Drop-off location must be at least 2 characters long"),
-
-  fare: z.number().nonnegative("Fare cannot be negative").optional(),
-
-  driver: z.string().min(1, "Driver ID is required"),
+  pickupLocation: locationSchema,
+  dropOffLocation: locationSchema,
 });
 
 export const updateRideStatusZodSchema = z.object({
-  status: z.enum([...Object.values(RideStatus)] as [
-    RideStatus,
-    ...RideStatus[]
-  ]),
+  status: z
+    .enum([...Object.values(RideStatus)] as [RideStatus, ...RideStatus[]])
+    .optional(),
 });

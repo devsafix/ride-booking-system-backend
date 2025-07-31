@@ -3,10 +3,11 @@ import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status-codes";
 import { catchAsync } from "../../utils/catchAsync";
 import { RideServices } from "./ride.service";
+import { RideStatus } from "./ride.interface";
 
-const createRide = catchAsync(async (req: Request, res: Response) => {
+const requestRide = catchAsync(async (req: Request, res: Response) => {
   const riderId = req.user.id;
-  const ride = await RideServices.createRide({ ...req.body, rider: riderId });
+  const ride = await RideServices.requestRide(riderId, req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.CREATED,
@@ -29,26 +30,20 @@ const getMyRides = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
-  const rideId = req.params.id;
-  const status = req.body.status;
-  const driverId = req.user?.role === "driver" ? req.user.id : undefined;
-
-  const ride = await RideServices.updateRideStatus(rideId, status, driverId);
-
+const getPendingRides = catchAsync(async (req: Request, res: Response) => {
+  const pendingRides = await RideServices.getPendingRides();
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: "Ride status updated successfully",
-    data: ride,
+    message: "Pending rides fetched successfully",
+    data: pendingRides,
   });
 });
 
-const assignDriver = catchAsync(async (req: Request, res: Response) => {
+const acceptRide = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
   const driverId = req.user.id;
-
-  const ride = await RideServices.assignDriverToRide(rideId, driverId);
+  const ride = await RideServices.acceptRide(rideId, driverId);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -58,10 +53,36 @@ const assignDriver = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const rejectRide = catchAsync(async (req: Request, res: Response) => {
+  const rideId = req.params.id;
+  const driverId = req.user.id;
+  const ride = await RideServices.rejectRide(rideId, driverId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Ride rejected by driver",
+    data: ride,
+  });
+});
+
+const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
+  const rideId = req.params.id;
+  const driverId = req.user.id;
+  const status = req.body.status as RideStatus;
+  const ride = await RideServices.updateRideStatus(rideId, driverId, status);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Ride status updated successfully",
+    data: ride,
+  });
+});
+
 const cancelRide = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
-  const riderId = req.user?.id;
-
+  const riderId = req.user.id;
   const ride = await RideServices.cancelRide(rideId, riderId);
 
   sendResponse(res, {
@@ -73,9 +94,11 @@ const cancelRide = catchAsync(async (req: Request, res: Response) => {
 });
 
 export const RideControllers = {
-  createRide,
+  requestRide,
   getMyRides,
+  getPendingRides,
+  acceptRide,
+  rejectRide,
   updateRideStatus,
-  assignDriver,
   cancelRide,
 };
