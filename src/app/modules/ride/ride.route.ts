@@ -36,4 +36,11 @@ router.patch(
   RideControllers.assignDriver
 );
 
+router.patch(
+  "/cancel/:id",
+  checkAuth,
+  checkRole(userRoles.RIDER),
+  RideControllers.cancelRide
+);
+
 export const RideRoutes = router;

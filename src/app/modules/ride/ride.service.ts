@@ -61,9 +61,28 @@ const assignDriverToRide = async (rideId: string, driverId: string) => {
   return ride;
 };
 
+const cancelRide = async (rideId: string, riderId: string) => {
+  const ride = await Ride.findById(rideId);
+  if (!ride) throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+
+  if (ride.rider?.toString() !== riderId) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized");
+  }
+
+  if (ride.status !== "requested") {
+    throw new AppError(httpStatus.BAD_REQUEST, "Cannot cancel at this stage");
+  }
+
+  ride.status = "cancelled" as RideStatus;
+  await ride.save();
+
+  return ride;
+};
+
 export const RideServices = {
   createRide,
   getMyRides,
   updateRideStatus,
   assignDriverToRide,
+  cancelRide,
 };

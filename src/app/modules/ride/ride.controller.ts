@@ -58,9 +58,24 @@ const assignDriver = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const cancelRide = catchAsync(async (req: Request, res: Response) => {
+  const rideId = req.params.id;
+  const riderId = req.user?.id;
+
+  const ride = await RideServices.cancelRide(rideId, riderId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Ride cancelled successfully",
+    data: ride,
+  });
+});
+
 export const RideControllers = {
   createRide,
   getMyRides,
   updateRideStatus,
   assignDriver,
+  cancelRide,
 };
