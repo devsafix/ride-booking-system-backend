@@ -16,4 +16,11 @@ router.patch(
   DriverControllers.updateAvailability
 );
 
+router.get(
+  "/earnings",
+  checkAuth,
+  checkRole(userRoles.DRIVER),
+  DriverControllers.getEarnings
+);
+
 export const DriverRoutes = router;

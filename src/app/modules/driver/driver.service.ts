@@ -1,6 +1,8 @@
 import { User } from "../user/user.model";
 import AppError from "../../errorHelpers/AppError";
 import httpStatus from "http-status-codes";
+import { Ride } from "../ride/ride.model";
+import { RideStatus } from "../ride/ride.interface";
 
 const updateAvailabilityStatus = async (
   driverId: string,
@@ -28,7 +30,23 @@ const updateAvailabilityStatus = async (
   return driver;
 };
 
+const getEarningsHistory = async (driverId: string) => {
+  const earnings = await Ride.find({
+    driver: driverId,
+    status: RideStatus.COMPLETED,
+  }).populate("rider");
+
+  if (!earnings) {
+    throw new AppError(
+      httpStatus.NOT_FOUND,
+      "No earnings history found for this driver"
+    );
+  }
+
+  return earnings;
+};
 
 export const DriverServices = {
   updateAvailabilityStatus,
+  getEarningsHistory,
 };

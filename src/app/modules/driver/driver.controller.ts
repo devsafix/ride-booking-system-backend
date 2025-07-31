@@ -21,6 +21,19 @@ const updateAvailability = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getEarnings = catchAsync(async (req: Request, res: Response) => {
+  const driverId = req.user.id;
+  const result = await DriverServices.getEarningsHistory(driverId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Earnings history retrieved successfully",
+    data: result,
+  });
+});
+
 export const DriverControllers = {
   updateAvailability,
+  getEarnings,
 };
