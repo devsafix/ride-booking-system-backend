@@ -19,11 +19,13 @@ router.post(
   RideControllers.createRide
 );
 
-router.get("/my",checkAuth, checkRole(userRoles.RIDER), RideControllers.getMyRides);
+router.get("/my", checkAuth, RideControllers.getMyRides);
 
 router.patch(
   "/status/:id",
   validateRequest(updateRideStatusZodSchema),
+  checkAuth,
+  checkRole(userRoles.DRIVER),
   RideControllers.updateRideStatus
 );
 

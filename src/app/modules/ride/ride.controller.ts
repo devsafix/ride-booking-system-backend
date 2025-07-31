@@ -32,7 +32,7 @@ const getMyRides = catchAsync(async (req: Request, res: Response) => {
 const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
   const status = req.body.status;
-  const driverId = req.user?.role === "driver" ? req.user._id : undefined;
+  const driverId = req.user?.role === "driver" ? req.user.id : undefined;
 
   const ride = await RideServices.updateRideStatus(rideId, status, driverId);
 
