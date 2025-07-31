@@ -46,7 +46,7 @@ const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
 
 const assignDriver = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
-  const driverId = req.user._id;
+  const driverId = req.user.id;
 
   const ride = await RideServices.assignDriverToRide(rideId, driverId);
 

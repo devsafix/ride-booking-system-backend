@@ -29,6 +29,11 @@ router.patch(
   RideControllers.updateRideStatus
 );
 
-router.patch("/accept/:id", RideControllers.assignDriver);
+router.patch(
+  "/accept/:id",
+  checkAuth,
+  checkRole(userRoles.DRIVER),
+  RideControllers.assignDriver
+);
 
 export const RideRoutes = router;
