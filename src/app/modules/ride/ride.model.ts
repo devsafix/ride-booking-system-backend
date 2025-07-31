@@ -29,11 +29,6 @@ const rideSchema = new Schema<IRide>(
       type: Number,
       default: 0,
     },
-    timestamps: {
-      type: Map,
-      of: Date,
-      default: {},
-    },
   },
   {
     timestamps: true,

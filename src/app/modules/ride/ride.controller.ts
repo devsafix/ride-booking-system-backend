@@ -5,7 +5,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import { RideServices } from "./ride.service";
 
 const createRide = catchAsync(async (req: Request, res: Response) => {
-  const riderId = req.user._id;
+  const riderId = req.user.id;
   const ride = await RideServices.createRide({ ...req.body, rider: riderId });
 
   sendResponse(res, {

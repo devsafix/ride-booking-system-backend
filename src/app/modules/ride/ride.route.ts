@@ -6,12 +6,14 @@ import {
 import { RideControllers } from "./ride.controller";
 
 import { validateRequest } from "../../middlewares/validateRequest";
+import { checkAuth } from "../../middlewares/checkAuth";
 
 const router = express.Router();
 
 router.post(
   "/request",
   validateRequest(createRideZodSchema),
+  checkAuth,
   RideControllers.createRide
 );
 

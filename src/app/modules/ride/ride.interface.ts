@@ -17,5 +17,4 @@ export interface IRide {
   dropOffLocation: string;
   status?: RideStatus;
   fare?: number;
-  timestamps?: Record<string, Date>;
 }
