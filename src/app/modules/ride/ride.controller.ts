@@ -17,7 +17,7 @@ const createRide = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getMyRides = catchAsync(async (req: Request, res: Response) => {
-  const userId = req.user._id;
+  const userId = req.user.id;
   const role = req.user.role;
   const rides = await RideServices.getMyRides(userId, role);
 

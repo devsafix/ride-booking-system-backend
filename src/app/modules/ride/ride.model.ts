@@ -6,11 +6,11 @@ const rideSchema = new Schema<IRide>(
     rider: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
     driver: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     pickupLocation: {
       type: String,

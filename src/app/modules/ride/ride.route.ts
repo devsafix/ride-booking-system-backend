@@ -7,6 +7,8 @@ import { RideControllers } from "./ride.controller";
 
 import { validateRequest } from "../../middlewares/validateRequest";
 import { checkAuth } from "../../middlewares/checkAuth";
+import { checkRole } from "../../middlewares/checkRole";
+import { userRoles } from "../../constants/role";
 
 const router = express.Router();
 
@@ -17,7 +19,7 @@ router.post(
   RideControllers.createRide
 );
 
-router.get("/my", RideControllers.getMyRides);
+router.get("/my",checkAuth, checkRole(userRoles.RIDER), RideControllers.getMyRides);
 
 router.patch(
   "/status/:id",

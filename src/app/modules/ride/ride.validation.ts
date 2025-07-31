@@ -2,7 +2,7 @@ import { z } from "zod";
 import { RideStatus } from "./ride.interface";
 
 export const createRideZodSchema = z.object({
-  rider: z.string().min(1, "Rider ID is required"),
+  rider: z.string().optional(),
 
   pickupLocation: z
     .string()
@@ -14,7 +14,7 @@ export const createRideZodSchema = z.object({
 
   fare: z.number().nonnegative("Fare cannot be negative").optional(),
 
-  driver: z.string().min(1, "Driver ID must be a string").optional(),
+  driver: z.string().min(1, "Driver ID is required"),
 });
 
 export const updateRideStatusZodSchema = z.object({
