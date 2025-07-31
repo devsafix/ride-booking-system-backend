@@ -4,11 +4,7 @@ import httpStatus from "http-status-codes";
 import { envVariables } from "../config/env";
 import { verifyToken } from "../utils/jwt";
 import { User } from "../modules/user/user.model";
-
-interface JwtPayload {
-  id: string;
-  role: string;
-}
+import { JwtPayload } from "jsonwebtoken";
 
 export const checkAuth = async (
   req: Request,

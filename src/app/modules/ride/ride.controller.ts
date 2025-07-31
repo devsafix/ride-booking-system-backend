@@ -5,7 +5,7 @@ import { catchAsync } from "../../utils/catchAsync";
 import { RideServices } from "./ride.service";
 
 const createRide = catchAsync(async (req: Request, res: Response) => {
-  const riderId = req.user._id;
+  const riderId = req.user.id;
   const ride = await RideServices.createRide({ ...req.body, rider: riderId });
 
   sendResponse(res, {
@@ -17,7 +17,7 @@ const createRide = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getMyRides = catchAsync(async (req: Request, res: Response) => {
-  const userId = req.user._id;
+  const userId = req.user.id;
   const role = req.user.role;
   const rides = await RideServices.getMyRides(userId, role);
 
@@ -32,7 +32,7 @@ const getMyRides = catchAsync(async (req: Request, res: Response) => {
 const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
   const status = req.body.status;
-  const driverId = req.user?.role === "driver" ? req.user._id : undefined;
+  const driverId = req.user?.role === "driver" ? req.user.id : undefined;
 
   const ride = await RideServices.updateRideStatus(rideId, status, driverId);
 
@@ -46,7 +46,7 @@ const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
 
 const assignDriver = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
-  const driverId = req.user._id;
+  const driverId = req.user.id;
 
   const ride = await RideServices.assignDriverToRide(rideId, driverId);
 
@@ -58,9 +58,24 @@ const assignDriver = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const cancelRide = catchAsync(async (req: Request, res: Response) => {
+  const rideId = req.params.id;
+  const riderId = req.user?.id;
+
+  const ride = await RideServices.cancelRide(rideId, riderId);
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Ride cancelled successfully",
+    data: ride,
+  });
+});
+
 export const RideControllers = {
   createRide,
   getMyRides,
   updateRideStatus,
   assignDriver,
+  cancelRide,
 };

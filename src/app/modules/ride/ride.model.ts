@@ -6,11 +6,11 @@ const rideSchema = new Schema<IRide>(
     rider: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
     driver: {
       type: Schema.Types.ObjectId,
       ref: "User",
+      required: true,
     },
     pickupLocation: {
       type: String,
@@ -28,11 +28,6 @@ const rideSchema = new Schema<IRide>(
     fare: {
       type: Number,
       default: 0,
-    },
-    timestamps: {
-      type: Map,
-      of: Date,
-      default: {},
     },
   },
   {
