@@ -28,9 +28,14 @@ export const seedSuperAdmin = async () => {
       isBlocked: false,
     };
 
-    const superAdmin = await User.create(payload);
-    console.log(superAdmin);
+    const superAdmin = await User.findOneAndUpdate(
+      { email: envVariables.ADMIN_EMAIL },
+      { $set: payload },
+      { new: true, upsert: true }
+    );
+
+    console.log(`✅ Admin created successfully: ${superAdmin.email}`);
   } catch (error) {
-    console.log(error);
+    console.error("❌ Failed to seed super admin:", error);
   }
 };
