@@ -1,0 +1,762 @@
+{
+	"info": {
+		"_postman_id": "8951f8c6-f0e4-4a2d-b005-6243a86f7d65",
+		"name": "Ride booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "42557095"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n  \"name\": \"Driver 2\",\r\n  \"email\": \"driver2@example.com\",\r\n  \"password\": \"password123\",\r\n  \"role\": \"driver\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/auth/register",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"rider1@example.com\",\r\n  \"password\": \"password123\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/auth/login",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "View all users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzM3Yzg1ZTkzNTIwNThmZTIxMCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzE0MywiZXhwIjoxNzU0MTQzNTQzfQ.uKrQWyUANmQL-5TqkbB8noi-o-yPl_xgh0Pn2UyuSOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"rider@example.com\",\r\n  \"password\": \"rider123\"\r\n}"
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/users/all-users",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"all-users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Block an user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzM3Yzg1ZTkzNTIwNThmZTIxMCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzE0MywiZXhwIjoxNzU0MTQzNTQzfQ.uKrQWyUANmQL-5TqkbB8noi-o-yPl_xgh0Pn2UyuSOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/users/block/688cc762c85e9352058fe217",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"block",
+								"688cc762c85e9352058fe217"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Approve a driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzM3Yzg1ZTkzNTIwNThmZTIxMCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzE0MywiZXhwIjoxNzU0MTQzNTQzfQ.uKrQWyUANmQL-5TqkbB8noi-o-yPl_xgh0Pn2UyuSOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/users/approve/688cc754c85e9352058fe214",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"approve",
+								"688cc754c85e9352058fe214"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlock a user",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzM3Yzg1ZTkzNTIwNThmZTIxMCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzE0MywiZXhwIjoxNzU0MTQzNTQzfQ.uKrQWyUANmQL-5TqkbB8noi-o-yPl_xgh0Pn2UyuSOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"block\": true \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/users/unblock/688cc762c85e9352058fe217",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"unblock",
+								"688cc762c85e9352058fe217"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suspend a driver",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGJhOTZmMjFiZWFlZWY3YmQyZjQ0MSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mzk4MzM2MywiZXhwIjoxNzU0MDY5NzYzfQ.CmUeIdcneBqHfRWpISWWKu3yifktBJtfbnYDEbfBIuA",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/users/suspend/688c8fe0f61c5d5729b4f4a0",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"suspend",
+								"688c8fe0f61c5d5729b4f4a0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rider",
+			"item": [
+				{
+					"name": "Request a Ride",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzI0Yzg1ZTkzNTIwNThmZTIwZCIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc1NDA1NjU5OCwiZXhwIjoxNzU0MTQyOTk4fQ.-EHOVWOJQn4aCIHGBafdKcTZ2_qhcQWQegAwNkgjbPk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"pickupLocation\": {\r\n    \"latitude\": 2.8103,\r\n    \"longitude\": 9.4125\r\n  },\r\n  \"dropOffLocation\": {\r\n    \"latitude\": 25.7771,\r\n    \"longitude\": 5.3994\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/request",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View My Ride",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzI0Yzg1ZTkzNTIwNThmZTIwZCIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc1NDA1NjU5OCwiZXhwIjoxNzU0MTQyOTk4fQ.-EHOVWOJQn4aCIHGBafdKcTZ2_qhcQWQegAwNkgjbPk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rider\" : \"6889cff2e677e390b4661681\",\r\n  \"pickupLocation\": \"123 Main St\",\r\n  \"dropOffLocation\": \"456 Park Ave\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/my",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"my"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Ride Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzU0Yzg1ZTkzNTIwNThmZTIxNCIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNTY5MTMsImV4cCI6MTc1NDE0MzMxM30.h56egyU-Jl2_4_TSiCAa4mRU0LEr1UK0ci3QNCLfZbQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"completed\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/status/688cc8e75666a36f52ca1c1b",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"status",
+								"688cc8e75666a36f52ca1c1b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel a Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzI0Yzg1ZTkzNTIwNThmZTIwZCIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc1NDA1NjU5OCwiZXhwIjoxNzU0MTQyOTk4fQ.-EHOVWOJQn4aCIHGBafdKcTZ2_qhcQWQegAwNkgjbPk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rider\" : \"6889cff2e677e390b4661681\",\r\n  \"pickupLocation\": \"123 Main St\",\r\n  \"dropOffLocation\": \"456 Park Ave\"\r\n}\r\n"
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/cancel/688cc81e5666a36f52ca1c0a",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"cancel",
+								"688cc81e5666a36f52ca1c0a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Rides",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGJhOTZmMjFiZWFlZWY3YmQyZjQ0MSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1Mzk4NDI4OSwiZXhwIjoxNzU0MDcwNjg5fQ.P-7Q_eZYYcE1AJzQxnySrZBJGF7qYw-nqSGXqX6VVDc",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/all-rides",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"all-rides"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pending Ride",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzU0Yzg1ZTkzNTIwNThmZTIxNCIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNTY5MTMsImV4cCI6MTc1NDE0MzMxM30.h56egyU-Jl2_4_TSiCAa4mRU0LEr1UK0ci3QNCLfZbQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/pending",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"pending"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Accept a Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzU0Yzg1ZTkzNTIwNThmZTIxNCIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNTY5MTMsImV4cCI6MTc1NDE0MzMxM30.h56egyU-Jl2_4_TSiCAa4mRU0LEr1UK0ci3QNCLfZbQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/accept/688cc8e75666a36f52ca1c1b",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"accept",
+								"688cc8e75666a36f52ca1c1b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reject a Ride",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGJhYTIzMjFiZWFlZWY3YmQyZjQ0NyIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTM5OTEyOTcsImV4cCI6MTc1NDA3NzY5N30.O_sawEa5jV2nu6IwZmeqkz71g_ILEOVO6DiJ0CxQX4Y",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/rides/reject/688c9b115473ed652a10065d",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"rides",
+								"reject",
+								"688c9b115473ed652a10065d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "View Earnings",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzU0Yzg1ZTkzNTIwNThmZTIxNCIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNTY5MTMsImV4cCI6MTc1NDE0MzMxM30.h56egyU-Jl2_4_TSiCAa4mRU0LEr1UK0ci3QNCLfZbQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"status\": \"completed\"\r\n}"
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/drivers/earnings",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"earnings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Availability Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGM4ZmUwZjYxYzVkNTcyOWI0ZjRhMCIsInJvbGUiOiJkcml2ZXIiLCJpYXQiOjE3NTQwNDM3NzcsImV4cCI6MTc1NDEzMDE3N30.IMLhVvSNPQ4Ka1bdo6IjcyIWVGu-U3sfeuIReOBsTgk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"isAvailable\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/drivers/availability",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"drivers",
+								"availability"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Ride Reports",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzM3Yzg1ZTkzNTIwNThmZTIxMCIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc1NDA1NzE0MywiZXhwIjoxNzU0MTQzNTQzfQ.uKrQWyUANmQL-5TqkbB8noi-o-yPl_xgh0Pn2UyuSOo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n    \"isAvailable\": true\r\n}"
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/admin/reports/rides",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"reports",
+								"rides"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Feedback",
+			"item": [
+				{
+					"name": "Submit Feedback",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzI0Yzg1ZTkzNTIwNThmZTIwZCIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc1NDA1NzU5MywiZXhwIjoxNzU0MTQzOTkzfQ.tPmqrhCm7f6gNaHZx-1iJ8sriFTLRatmS6xz1kQE-tk",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rideId\": \"688cc8e75666a36f52ca1c1b\",\r\n  \"rating\": 5,\r\n  \"comment\": \"The driver was excellent and the car was clean!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/feedbacks/submit",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"feedbacks",
+								"submit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Feedback",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4OGNjNzI0Yzg1ZTkzNTIwNThmZTIwZCIsInJvbGUiOiJyaWRlciIsImlhdCI6MTc1NDA1NzU5MywiZXhwIjoxNzU0MTQzOTkzfQ.tPmqrhCm7f6gNaHZx-1iJ8sriFTLRatmS6xz1kQE-tk",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://ride-booking-system-backend-by-safi.vercel.app/api/v1/feedbacks/driver/688cc754c85e9352058fe214",
+							"protocol": "https",
+							"host": [
+								"ride-booking-system-backend-by-safi",
+								"vercel",
+								"app"
+							],
+							"path": [
+								"api",
+								"v1",
+								"feedbacks",
+								"driver",
+								"688cc754c85e9352058fe214"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
