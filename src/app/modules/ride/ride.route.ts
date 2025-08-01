@@ -20,8 +20,8 @@ router.post(
   RideControllers.requestRide
 );
 
-// Get my ride history (for both riders and drivers, and all for admin)
-router.get("/my", checkAuth, RideControllers.getMyRides);
+// Get my ride history on rider
+router.get("/my", checkAuth, checkRole(userRoles.RIDER), RideControllers.getMyRides);
 router.get(
   "/all-rides",
   checkAuth,

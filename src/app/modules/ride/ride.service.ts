@@ -155,7 +155,7 @@ const updateRideStatus = async (
   }
 
   if (status === RideStatus.COMPLETED) {
-    ride.fare = calculateFare();
+    ride.fare = calculateFare(ride.pickupLocation, ride.dropOffLocation);
   }
 
   await ride.save();

@@ -38,7 +38,7 @@ This is a robust and scalable backend API for a ride-booking service, similar to
 
 - **Modular Architecture**
 
-  - Well-structured codebase: `auth`, `user`, `driver`, `ride`
+  - Well-structured codebase: `auth`, `user`, `driver`, `ride`, `admin`
 
 - **Fare Calculation**
   - Logical fare based on real distance using the **Haversine Formula**
@@ -118,21 +118,21 @@ npm start
 
 ---
 
-### Ride Endpoints (`/api/v1/ride`)
+### Ride Endpoints (`/api/v1/rides`)
 
-| Method | Endpoint     | Description                    | Access        |
-| ------ | ------------ | ------------------------------ | ------------- |
-| POST   | /request     | Request a new ride             | Rider         |
-| PATCH  | /accept/\:id | Accept ride request            | Driver        |
-| PATCH  | /reject/\:id | Reject ride request            | Driver        |
-| PATCH  | /cancel/\:id | Cancel a ride                  | Rider         |
-| PATCH  | /status/\:id | Update ride status             | Driver        |
-| GET    | /pending     | View all pending ride requests | Driver        |
-| GET    | /my          | View ride history              | Rider, Driver |
+| Method | Endpoint     | Description                    | Access |
+| ------ | ------------ | ------------------------------ | ------ |
+| POST   | /request     | Request a new ride             | Rider  |
+| PATCH  | /accept/\:id | Accept ride request            | Driver |
+| PATCH  | /reject/\:id | Reject ride request            | Driver |
+| PATCH  | /cancel/\:id | Cancel a ride                  | Rider  |
+| PATCH  | /status/\:id | Update ride status             | Driver |
+| GET    | /pending     | View all pending ride requests | Driver |
+| GET    | /my          | View ride history              | Rider  |
 
 ---
 
-### Driver Endpoints (`/api/v1/driver`)
+### Driver Endpoints (`/api/v1/drivers`)
 
 | Method | Endpoint      | Description                    | Access |
 | ------ | ------------- | ------------------------------ | ------ |
@@ -141,7 +141,7 @@ npm start
 
 ---
 
-### User Management Endpoints (`/api/v1/user`)
+### User Management Endpoints (`/api/v1/users`)
 
 | Method | Endpoint      | Description            | Access |
 | ------ | ------------- | ---------------------- | ------ |
@@ -158,6 +158,15 @@ npm start
 | Method | Endpoint       | Description                  | Access |
 | ------ | -------------- | ---------------------------- | ------ |
 | GET    | /reports/rides | Generate report of all rides | Admin  |
+
+---
+
+### Admin Report Endpoints (`/api/v1/feedbacks`)
+
+| Method | Endpoint                     | Description                      | Access |
+| ------ | ---------------------------- | -------------------------------- | ------ |
+| POST   | /feedbacks/submit            | Submit feedback                  | Rider  |
+| GET    | /feedbacks/driver/\:driverId | Get driver ratings and feedbacks | Rider  |
 
 ---
 

@@ -25,6 +25,8 @@ export interface IRide {
   dropOffLocation: ILocation;
   status: RideStatus;
   fare: number;
+  feedback?: string;
+  createdAt?: Date;
   statusHistory: {
     status: RideStatus;
     timestamp: Date;
