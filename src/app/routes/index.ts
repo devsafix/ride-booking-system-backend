@@ -30,7 +30,7 @@ const moduleRoutes = [
     route: AdminRoutes,
   },
   {
-    path: "/feedback",
+    path: "/feedbacks",
     route: FeedbackRoutes,
   },
 ];

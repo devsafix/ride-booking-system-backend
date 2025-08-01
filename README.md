@@ -120,15 +120,15 @@ npm start
 
 ### Ride Endpoints (`/api/v1/rides`)
 
-| Method | Endpoint     | Description                    | Access        |
-| ------ | ------------ | ------------------------------ | ------------- |
-| POST   | /request     | Request a new ride             | Rider         |
-| PATCH  | /accept/\:id | Accept ride request            | Driver        |
-| PATCH  | /reject/\:id | Reject ride request            | Driver        |
-| PATCH  | /cancel/\:id | Cancel a ride                  | Rider         |
-| PATCH  | /status/\:id | Update ride status             | Driver        |
-| GET    | /pending     | View all pending ride requests | Driver        |
-| GET    | /my          | View ride history              | Rider, Driver |
+| Method | Endpoint     | Description                    | Access |
+| ------ | ------------ | ------------------------------ | ------ |
+| POST   | /request     | Request a new ride             | Rider  |
+| PATCH  | /accept/\:id | Accept ride request            | Driver |
+| PATCH  | /reject/\:id | Reject ride request            | Driver |
+| PATCH  | /cancel/\:id | Cancel a ride                  | Rider  |
+| PATCH  | /status/\:id | Update ride status             | Driver |
+| GET    | /pending     | View all pending ride requests | Driver |
+| GET    | /my          | View ride history              | Rider  |
 
 ---
 
@@ -158,6 +158,15 @@ npm start
 | Method | Endpoint       | Description                  | Access |
 | ------ | -------------- | ---------------------------- | ------ |
 | GET    | /reports/rides | Generate report of all rides | Admin  |
+
+---
+
+### Admin Report Endpoints (`/api/v1/feedbacks`)
+
+| Method | Endpoint                     | Description                      | Access |
+| ------ | ---------------------------- | -------------------------------- | ------ |
+| POST   | /feedbacks/submit            | Submit feedback                  | Rider  |
+| GET    | /feedbacks/driver/\:driverId | Get driver ratings and feedbacks | Rider  |
 
 ---
 

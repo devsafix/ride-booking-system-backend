@@ -26,6 +26,7 @@ export interface IRide {
   status: RideStatus;
   fare: number;
   feedback?: string;
+  createdAt?: Date;
   statusHistory: {
     status: RideStatus;
     timestamp: Date;

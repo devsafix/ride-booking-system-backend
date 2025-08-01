@@ -30,6 +30,9 @@ const rideSchema = new Schema<IRide>(
       type: Number,
       default: 0,
     },
+    createdAt: {
+      type: Date,
+    },
     statusHistory: [
       {
         status: {

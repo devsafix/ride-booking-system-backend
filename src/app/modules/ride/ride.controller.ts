@@ -31,12 +31,22 @@ const getMyRides = catchAsync(async (req: Request, res: Response) => {
 });
 
 const getPendingRides = catchAsync(async (req: Request, res: Response) => {
-  const pendingRides = await RideServices.getPendingRides();
+  const result = await RideServices.getPendingRides();
+
+  if (result.length === 0) {
+    return sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "No pending rides available at the moment.",
+      data: result,
+    });
+  }
+
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
     message: "Pending rides fetched successfully",
-    data: pendingRides,
+    data: result,
   });
 });
 

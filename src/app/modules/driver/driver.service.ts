@@ -31,19 +31,35 @@ const updateAvailabilityStatus = async (
 };
 
 const getEarningsHistory = async (driverId: string) => {
-  const earnings = await Ride.find({
+  const completedRides = await Ride.find({
     driver: driverId,
     status: RideStatus.COMPLETED,
-  }).populate("rider");
+  }).populate("rider", "name");
 
-  if (!earnings) {
+  if (!completedRides || completedRides.length === 0) {
     throw new AppError(
       httpStatus.NOT_FOUND,
       "No earnings history found for this driver"
     );
   }
 
-  return earnings;
+  const totalEarnings = completedRides.reduce(
+    (sum, ride) => sum + (ride.fare || 0),
+    0
+  );
+
+  const earningsHistory = completedRides.map((ride) => ({
+    rideId: ride._id,
+    fare: ride.fare,
+    pickupLocation: ride.pickupLocation,
+    dropOffLocation: ride.dropOffLocation,
+    date: ride.createdAt,
+  }));
+
+  return {
+    totalEarnings,
+    history: earningsHistory,
+  };
 };
 
 export const DriverServices = {
