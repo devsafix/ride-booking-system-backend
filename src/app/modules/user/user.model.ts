@@ -19,6 +19,8 @@ const userSchema = new Schema<IUser>(
     isBlocked: { type: Boolean, default: false },
     isApproved: { type: Boolean, default: false },
     isAvailable: { type: Boolean, default: false },
+    averageRating: { type: Number, default: 0 },
+    totalRatings: { type: Number, default: 0 },
   },
   { timestamps: true, versionKey: false }
 );
@@ -26,10 +28,12 @@ const userSchema = new Schema<IUser>(
 // Hash password before save
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) return next();
-  this.password = await bcrypt.hash(
-    this.password,
-    Number(process.env.BCRYPT_SALT_ROUND)
-  );
+  if (typeof this.password === "string") {
+    this.password = await bcrypt.hash(
+      this.password,
+      Number(process.env.BCRYPT_SALT_ROUND)
+    );
+  }
   next();
 });
 

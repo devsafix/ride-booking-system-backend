@@ -1,7 +1,6 @@
 import { UserRole } from "../../constants/role";
 
 export interface IUser {
-  _id?: string
   name: string;
   email: string;
   password: string | undefined;
@@ -9,4 +8,6 @@ export interface IUser {
   isBlocked: boolean;
   isApproved?: boolean;
   isAvailable?: boolean;
+  averageRating?: number;
+  totalRatings?: number;
 }

@@ -38,7 +38,7 @@ This is a robust and scalable backend API for a ride-booking service, similar to
 
 - **Modular Architecture**
 
-  - Well-structured codebase: `auth`, `user`, `driver`, `ride`
+  - Well-structured codebase: `auth`, `user`, `driver`, `ride`, `admin`
 
 - **Fare Calculation**
   - Logical fare based on real distance using the **Haversine Formula**
@@ -118,7 +118,7 @@ npm start
 
 ---
 
-### Ride Endpoints (`/api/v1/ride`)
+### Ride Endpoints (`/api/v1/rides`)
 
 | Method | Endpoint     | Description                    | Access        |
 | ------ | ------------ | ------------------------------ | ------------- |
@@ -132,7 +132,7 @@ npm start
 
 ---
 
-### Driver Endpoints (`/api/v1/driver`)
+### Driver Endpoints (`/api/v1/drivers`)
 
 | Method | Endpoint      | Description                    | Access |
 | ------ | ------------- | ------------------------------ | ------ |
@@ -141,7 +141,7 @@ npm start
 
 ---
 
-### User Management Endpoints (`/api/v1/user`)
+### User Management Endpoints (`/api/v1/users`)
 
 | Method | Endpoint      | Description            | Access |
 | ------ | ------------- | ---------------------- | ------ |
