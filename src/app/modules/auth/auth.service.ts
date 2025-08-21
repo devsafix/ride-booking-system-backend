@@ -1,7 +1,9 @@
+import { Response } from "express";
 import { envVariables } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
 import { BcryptHelper } from "../../utils/bcrypt";
 import { generateToken } from "../../utils/jwt";
+import { setAuthCookie } from "../../utils/setCookie";
 import { User } from "../user/user.model";
 import httpStatus from "http-status-codes";
 
@@ -26,7 +28,7 @@ const registerUser = async (payload: {
   };
 };
 
-const loginUser = async (email: string, password: string) => {
+const loginUser = async (res: Response, email: string, password: string) => {
   // Explicitly select the password field for this query only
   const user = await User.findOne({ email }).select("+password");
 
@@ -48,6 +50,8 @@ const loginUser = async (email: string, password: string) => {
     envVariables.JWT_ACCESS_SECRET,
     envVariables.JWT_ACCESS_EXPIRES
   );
+
+  setAuthCookie(res, accessToken);
 
   // Return the user object without the password
   user.password = undefined;
