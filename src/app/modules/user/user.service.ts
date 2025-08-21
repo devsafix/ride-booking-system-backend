@@ -7,6 +7,13 @@ const getAllUsers = async () => {
   return users;
 };
 
+const getMe = async (userId: string) => {
+  const user = await User.findById(userId).select("-password");
+  return {
+    data: user,
+  };
+};
+
 const blockUser = async (userId: string) => {
   const user = await User.findById(userId);
   if (!user) {
@@ -91,6 +98,7 @@ const suspendDriver = async (userId: string) => {
 
 export const UserServices = {
   getAllUsers,
+  getMe,
   blockUser,
   unblockUser,
   approveDriver,

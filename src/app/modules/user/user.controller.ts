@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import httpStatus from "http-status-codes";
 import { sendResponse } from "../../utils/sendResponse";
 import { UserServices } from "./user.service";
+import { JwtPayload } from "jsonwebtoken";
 
 const getUsers = async (req: Request, res: Response) => {
   const result = await UserServices.getAllUsers();
@@ -10,6 +11,18 @@ const getUsers = async (req: Request, res: Response) => {
     success: true,
     message: "Users retrieved successfully",
     data: result,
+  });
+};
+
+const getMe = async (req: Request, res: Response) => {
+  const decodedToken = req.user as JwtPayload;
+  const result = await UserServices.getMe(decodedToken.id);
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.CREATED,
+    message: "Your profile Retrieved Successfully",
+    data: result.data,
   });
 };
 
@@ -53,4 +66,11 @@ const suspend = async (req: Request, res: Response) => {
   });
 };
 
-export const UserControllers = { getUsers, block, unblock, approve, suspend };
+export const UserControllers = {
+  getUsers,
+  getMe,
+  block,
+  unblock,
+  approve,
+  suspend,
+};

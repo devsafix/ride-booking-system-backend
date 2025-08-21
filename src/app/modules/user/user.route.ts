@@ -12,6 +12,7 @@ router.get(
   checkRole(userRoles.ADMIN),
   UserControllers.getUsers
 );
+router.get("/me", checkAuth, UserControllers.getMe);
 router.patch(
   "/block/:id",
   checkAuth,
