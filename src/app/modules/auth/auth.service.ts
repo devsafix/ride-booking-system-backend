@@ -32,8 +32,12 @@ const loginUser = async (res: Response, email: string, password: string) => {
   // Explicitly select the password field for this query only
   const user = await User.findOne({ email }).select("+password");
 
-  if (!user || user.isBlocked) {
-    throw new AppError(httpStatus.UNAUTHORIZED, "User not found or blocked");
+  if (!user) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "User not found");
+  }
+
+  if (user.isBlocked) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "The user has been blocked");
   }
 
   const isPasswordValid = await BcryptHelper.comparePassword(
