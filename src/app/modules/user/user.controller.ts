@@ -3,6 +3,7 @@ import httpStatus from "http-status-codes";
 import { sendResponse } from "../../utils/sendResponse";
 import { UserServices } from "./user.service";
 import { JwtPayload } from "jsonwebtoken";
+import { catchAsync } from "../../utils/catchAsync";
 
 const getUsers = async (req: Request, res: Response) => {
   const result = await UserServices.getAllUsers();
@@ -25,6 +26,27 @@ const getMe = async (req: Request, res: Response) => {
     data: result.data,
   });
 };
+
+const updateUser = catchAsync(async (req: Request, res: Response) => {
+  const userId = req.params.id;
+
+  const verifiedToken = req.user;
+
+  const payload = req.body;
+
+  const user = await UserServices.updateUser(
+    userId,
+    payload,
+    verifiedToken as JwtPayload
+  );
+
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus.CREATED,
+    message: "User Updated Successfully",
+    data: user,
+  });
+});
 
 const block = async (req: Request, res: Response) => {
   const result = await UserServices.blockUser(req.params.id);
@@ -69,6 +91,7 @@ const suspend = async (req: Request, res: Response) => {
 export const UserControllers = {
   getUsers,
   getMe,
+  updateUser,
   block,
   unblock,
   approve,

@@ -13,6 +13,7 @@ router.get(
   UserControllers.getUsers
 );
 router.get("/me", checkAuth, UserControllers.getMe);
+router.patch("/:id", checkAuth, UserControllers.updateUser);
 router.patch(
   "/block/:id",
   checkAuth,
