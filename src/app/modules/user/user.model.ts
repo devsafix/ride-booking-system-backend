@@ -17,6 +17,7 @@ const userSchema = new Schema<IUser>(
       required: true,
     },
     contactNo: { type: String },
+    vehicleType: { type: String },
     isBlocked: { type: Boolean, default: false },
     isApproved: { type: Boolean, default: false },
     isAvailable: { type: Boolean, default: false },

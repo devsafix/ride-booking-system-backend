@@ -6,6 +6,7 @@ export interface IUser {
   password: string | undefined;
   role: UserRole;
   contactNo?: string;
+  vehicleType?: string;
   isBlocked: boolean;
   isApproved?: boolean;
   isAvailable?: boolean;
