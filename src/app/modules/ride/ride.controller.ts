@@ -20,7 +20,7 @@ const requestRide = catchAsync(async (req: Request, res: Response) => {
 const getMyRides = catchAsync(async (req: Request, res: Response) => {
   const userId = req.user.id;
   const role = req.user.role;
-  const rides = await RideServices.getMyRides(userId, role);
+  const rides = await RideServices.getMyRides(userId, role, req.query);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,

@@ -37,18 +37,64 @@ const requestRide = async (riderId: string, rideData: Partial<IRide>) => {
   return ride;
 };
 
-const getMyRides = async (userId: string, role: string) => {
+const getMyRides = async (userId: string, role: string, query: any) => {
   const filter: any = {};
+
+  // Apply role-based filtering
   if (role === "rider") {
     filter.rider = userId;
   } else if (role === "driver") {
     filter.driver = userId;
-  } else if (role === "admin") {
-    // Admins can see all rides, so no filter is needed
+  }
+  // Admins can see all, so no filter needed for admin role
+
+  // Apply status filter
+  if (query.status) {
+    filter.status = query.status;
   }
 
-  const rides = await Ride.find(filter).populate("rider").populate("driver");
-  return rides;
+  // Apply fare range filter
+  if (query.minFare || query.maxFare) {
+    filter.fare = {};
+    if (query.minFare) {
+      filter.fare.$gte = Number(query.minFare);
+    }
+    if (query.maxFare) {
+      filter.fare.$lte = Number(query.maxFare);
+    }
+  }
+
+  // Apply date range filter
+  if (query.startDate || query.endDate) {
+    filter.createdAt = {};
+    if (query.startDate) {
+      filter.createdAt.$gte = new Date(query.startDate);
+    }
+    if (query.endDate) {
+      filter.createdAt.$lte = new Date(query.endDate);
+    }
+  }
+
+  const page = Number(query.page) || 1;
+  const limit = Number(query.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  const total = await Ride.countDocuments(filter);
+  const rides = await Ride.find(filter)
+    .populate("rider")
+    .populate("driver")
+    .sort({ createdAt: -1 })
+    .skip(skip)
+    .limit(limit);
+
+  return {
+    meta: {
+      page,
+      limit,
+      total,
+    },
+    data: rides,
+  };
 };
 
 const getPendingRides = async () => {
