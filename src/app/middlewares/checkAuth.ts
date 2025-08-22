@@ -12,7 +12,7 @@ export const checkAuth = async (
   next: NextFunction
 ) => {
   try {
-    const token = req.headers.authorization;
+    const token = req.headers.authorization || req.cookies.accessToken;
 
     if (!token) {
       throw new AppError(httpStatus.UNAUTHORIZED, "Unauthorized: No token");
