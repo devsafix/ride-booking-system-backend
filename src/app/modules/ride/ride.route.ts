@@ -21,7 +21,16 @@ router.post(
 );
 
 // Get my ride history on rider
-router.get("/my", checkAuth, checkRole(userRoles.RIDER), RideControllers.getMyRides);
+router.get(
+  "/my",
+  checkAuth,
+  checkRole(userRoles.RIDER),
+  RideControllers.getMyRides
+);
+
+// Get my by id
+router.get("/:id", checkAuth, RideControllers.getRideById);
+
 router.get(
   "/all-rides",
   checkAuth,

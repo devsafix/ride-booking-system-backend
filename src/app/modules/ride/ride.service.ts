@@ -97,6 +97,14 @@ const getMyRides = async (userId: string, role: string, query: any) => {
   };
 };
 
+const getRideById = async (rideId: string) => {
+  const ride = await Ride.findById(rideId).populate("rider").populate("driver");
+  if (!ride) {
+    throw new AppError(httpStatus.NOT_FOUND, "Ride not found");
+  }
+  return ride;
+};
+
 const getPendingRides = async () => {
   const rides = await Ride.find({ status: RideStatus.REQUESTED }).populate(
     "rider"
@@ -231,6 +239,7 @@ const cancelRide = async (rideId: string, riderId: string) => {
 export const RideServices = {
   requestRide,
   getMyRides,
+  getRideById,
   getPendingRides,
   acceptRide,
   rejectRide,
