@@ -11,6 +11,7 @@ export const createUserZodSchema = z.object({
       required_error: "Email is required",
     })
     .email("Invalid email format"),
+  contactNo: z.string().optional(),
   password: z
     .string({
       required_error: "Password is required",

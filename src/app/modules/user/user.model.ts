@@ -16,6 +16,7 @@ const userSchema = new Schema<IUser>(
       enum: ["rider", "driver", "admin"],
       required: true,
     },
+    contactNo: { type: String },
     isBlocked: { type: Boolean, default: false },
     isApproved: { type: Boolean, default: false },
     isAvailable: { type: Boolean, default: false },

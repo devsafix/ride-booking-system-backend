@@ -1,11 +1,12 @@
 import { Response } from "express";
 import { envVariables } from "../../config/env";
 import AppError from "../../errorHelpers/AppError";
-import { BcryptHelper } from "../../utils/bcrypt";
 import { generateToken } from "../../utils/jwt";
 import { setAuthCookie } from "../../utils/setCookie";
 import { User } from "../user/user.model";
 import httpStatus from "http-status-codes";
+import { JwtPayload } from "jsonwebtoken";
+import bcryptjs from "bcryptjs";
 
 const registerUser = async (payload: {
   name: string;
@@ -40,7 +41,7 @@ const loginUser = async (res: Response, email: string, password: string) => {
     throw new AppError(httpStatus.UNAUTHORIZED, "The user has been blocked");
   }
 
-  const isPasswordValid = await BcryptHelper.comparePassword(
+  const isPasswordValid = await bcryptjs.compare(
     password,
     user.password as string
   );
@@ -63,4 +64,30 @@ const loginUser = async (res: Response, email: string, password: string) => {
   return { accessToken, user };
 };
 
-export const AuthServices = { registerUser, loginUser };
+const changePassword = async (
+  oldPassword: string,
+  newPassword: string,
+  decodedToken: JwtPayload
+) => {
+  const user = await User.findById(decodedToken.id).select("+password");
+
+  if (!user || !oldPassword) {
+    throw new AppError(
+      httpStatus.UNAUTHORIZED,
+      "User not found or password missing"
+    );
+  }
+  const isOldPasswordMatch = await bcryptjs.compare(
+    oldPassword,
+    user.password as string
+  );
+  if (!isOldPasswordMatch) {
+    throw new AppError(httpStatus.UNAUTHORIZED, "Old Password does not match");
+  }
+
+  user.password = newPassword;
+
+  await user.save();
+};
+
+export const AuthServices = { registerUser, loginUser, changePassword };

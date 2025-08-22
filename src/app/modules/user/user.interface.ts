@@ -5,6 +5,7 @@ export interface IUser {
   email: string;
   password: string | undefined;
   role: UserRole;
+  contactNo?: string;
   isBlocked: boolean;
   isApproved?: boolean;
   isAvailable?: boolean;
