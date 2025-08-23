@@ -28,9 +28,6 @@ router.get(
   RideControllers.getMyRides
 );
 
-// Get my by id
-router.get("/:id", checkAuth, RideControllers.getRideById);
-
 router.get(
   "/all-rides",
   checkAuth,
@@ -40,11 +37,21 @@ router.get(
 
 // Drivers can view all pending ride requests
 router.get(
-  "/pending",
+  "/pending-rides",
   checkAuth,
   checkRole(userRoles.DRIVER),
   RideControllers.getPendingRides
 );
+
+router.get(
+  "/accepted-rides",
+  checkAuth,
+  checkRole(userRoles.DRIVER),
+  RideControllers.getAcceptedRides
+);
+
+// Get my by id
+router.get("/:id", checkAuth, RideControllers.getRideById);
 
 // Drivers can accept a ride
 router.patch(

@@ -61,6 +61,26 @@ const getPendingRides = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getAcceptedRides = catchAsync(async (req: Request, res: Response) => {
+  const result = await RideServices.getAcceptedRides();
+
+  if (result.length === 0) {
+    return sendResponse(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "No pending rides available at the moment.",
+      data: result,
+    });
+  }
+
+  sendResponse(res, {
+    statusCode: httpStatus.OK,
+    success: true,
+    message: "Pending rides fetched successfully",
+    data: result,
+  });
+});
+
 const acceptRide = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
   const driverId = req.user.id;
@@ -122,5 +142,6 @@ export const RideControllers = {
   acceptRide,
   rejectRide,
   updateRideStatus,
+  getAcceptedRides,
   cancelRide,
 };

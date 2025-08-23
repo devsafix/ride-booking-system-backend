@@ -112,6 +112,13 @@ const getPendingRides = async () => {
   return rides;
 };
 
+const getAcceptedRides = async () => {
+  const rides = await Ride.find({ status: RideStatus.ACCEPTED }).populate(
+    "rider"
+  );
+  return rides;
+};
+
 const acceptRide = async (rideId: string, driverId: string) => {
   const ride = await Ride.findById(rideId);
   if (!ride) {
@@ -245,4 +252,5 @@ export const RideServices = {
   rejectRide,
   updateRideStatus,
   cancelRide,
+  getAcceptedRides,
 };
