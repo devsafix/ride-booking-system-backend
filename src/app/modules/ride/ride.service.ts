@@ -114,7 +114,9 @@ const getPendingRides = async () => {
 
 const getActiveRides = async () => {
   const rides = await Ride.find({
-    status: { $nin: [RideStatus.REQUESTED, RideStatus.COMPLETED] },
+    status: {
+      $nin: [RideStatus.REQUESTED, RideStatus.REJECTED, RideStatus.COMPLETED],
+    },
   }).populate("rider");
   return rides;
 };

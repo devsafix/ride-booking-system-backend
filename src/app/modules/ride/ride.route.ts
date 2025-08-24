@@ -41,7 +41,7 @@ router.get(
 );
 
 router.get(
-  "/accepted-rides",
+  "/active-rides",
   checkAuth,
   checkRole(userRoles.DRIVER),
   RideControllers.getActiveRides
