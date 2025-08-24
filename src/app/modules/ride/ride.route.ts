@@ -1,8 +1,5 @@
 import express from "express";
-import {
-  createRideZodSchema,
-  updateRideStatusZodSchema,
-} from "./ride.validation";
+import { createRideZodSchema } from "./ride.validation";
 import { RideControllers } from "./ride.controller";
 import { validateRequest } from "../../middlewares/validateRequest";
 import { checkAuth } from "../../middlewares/checkAuth";
@@ -47,7 +44,7 @@ router.get(
   "/accepted-rides",
   checkAuth,
   checkRole(userRoles.DRIVER),
-  RideControllers.getAcceptedRides
+  RideControllers.getActiveRides
 );
 
 // Get my by id
@@ -74,7 +71,6 @@ router.patch(
   "/status/:id",
   checkAuth,
   checkRole(userRoles.DRIVER),
-  validateRequest(updateRideStatusZodSchema),
   RideControllers.updateRideStatus
 );
 

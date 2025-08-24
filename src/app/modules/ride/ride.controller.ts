@@ -61,8 +61,8 @@ const getPendingRides = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
-const getAcceptedRides = catchAsync(async (req: Request, res: Response) => {
-  const result = await RideServices.getAcceptedRides();
+const getActiveRides = catchAsync(async (req: Request, res: Response) => {
+  const result = await RideServices.getActiveRides();
 
   if (result.length === 0) {
     return sendResponse(res, {
@@ -111,6 +111,7 @@ const updateRideStatus = catchAsync(async (req: Request, res: Response) => {
   const rideId = req.params.id;
   const driverId = req.user.id;
   const status = req.body.status as RideStatus;
+
   const ride = await RideServices.updateRideStatus(rideId, driverId, status);
 
   sendResponse(res, {
@@ -142,6 +143,6 @@ export const RideControllers = {
   acceptRide,
   rejectRide,
   updateRideStatus,
-  getAcceptedRides,
+  getActiveRides,
   cancelRide,
 };

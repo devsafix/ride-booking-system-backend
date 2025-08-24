@@ -3,8 +3,13 @@ import { sendResponse } from "../../utils/sendResponse";
 import httpStatus from "http-status-codes";
 import { catchAsync } from "../../utils/catchAsync";
 import { DriverServices } from "./driver.service";
+import AppError from "../../errorHelpers/AppError";
 
 const updateAvailability = catchAsync(async (req: Request, res: Response) => {
+  if (!req.body || typeof req.body.isAvailable === "undefined") {
+    throw new AppError(httpStatus.BAD_REQUEST, "isAvailable field is required");
+  }
+
   const driverId = req.user.id;
   const { isAvailable } = req.body;
 

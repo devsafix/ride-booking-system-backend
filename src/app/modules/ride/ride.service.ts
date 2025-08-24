@@ -112,10 +112,10 @@ const getPendingRides = async () => {
   return rides;
 };
 
-const getAcceptedRides = async () => {
-  const rides = await Ride.find({ status: RideStatus.ACCEPTED }).populate(
-    "rider"
-  );
+const getActiveRides = async () => {
+  const rides = await Ride.find({
+    status: { $nin: [RideStatus.REQUESTED, RideStatus.COMPLETED] },
+  }).populate("rider");
   return rides;
 };
 
@@ -252,5 +252,5 @@ export const RideServices = {
   rejectRide,
   updateRideStatus,
   cancelRide,
-  getAcceptedRides,
+  getActiveRides,
 };
