@@ -6,6 +6,7 @@ import AppError from "../../errorHelpers/AppError";
 
 const generateRideReport = async () => {
   const allRides = await Ride.find({})
+    .sort({ createdAt: -1 })
     .populate("rider", "-password")
     .populate("driver", "-password");
 
