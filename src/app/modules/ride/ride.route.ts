@@ -24,7 +24,7 @@ router.post(
 router.get(
   "/my",
   checkAuth,
-  checkRole(userRoles.RIDER),
+  checkRole(userRoles.RIDER, userRoles.DRIVER),
   RideControllers.getMyRides
 );
 
