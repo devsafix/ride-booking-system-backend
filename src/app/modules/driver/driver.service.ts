@@ -19,7 +19,7 @@ const updateAvailabilityStatus = async (
   if (!driver.isApproved && isAvailable) {
     throw new AppError(
       httpStatus.FORBIDDEN,
-      "Suspended drivers cannot be set as available"
+      "Your are not approve or suspended by admin, please contact admin"
     );
   }
 

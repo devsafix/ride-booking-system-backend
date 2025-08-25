@@ -220,7 +220,7 @@ const updateRideStatus = async (
   ) {
     ride.status = status;
   } else {
-    throw new AppError(httpStatus.BAD_REQUEST, "Invalid status transition");
+    throw new AppError(httpStatus.BAD_REQUEST, "Please provide valid status");
   }
 
   if (status === RideStatus.COMPLETED) {
