@@ -43,7 +43,7 @@ router.get(
 router.get(
   "/active-rides",
   checkAuth,
-  checkRole(userRoles.DRIVER),
+  checkRole(userRoles.DRIVER, userRoles.RIDER),
   RideControllers.getActiveRides
 );
 

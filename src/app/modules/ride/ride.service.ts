@@ -6,6 +6,7 @@ import AppError from "../../errorHelpers/AppError";
 import httpStatus from "http-status-codes";
 import { User } from "../user/user.model";
 import { calculateFare } from "../../utils/calculateFare";
+import { Types } from "mongoose";
 
 // An array of active statuses for a ride
 const activeRideStatuses = [
@@ -115,7 +116,12 @@ const getPendingRides = async () => {
 const getActiveRides = async () => {
   const rides = await Ride.find({
     status: {
-      $nin: [RideStatus.REQUESTED, RideStatus.REJECTED, RideStatus.COMPLETED],
+      $nin: [
+        RideStatus.REQUESTED,
+        RideStatus.REJECTED,
+        RideStatus.COMPLETED,
+        RideStatus.CANCELLED,
+      ],
     },
   }).populate("rider");
   return rides;

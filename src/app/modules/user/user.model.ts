@@ -23,6 +23,14 @@ const userSchema = new Schema<IUser>(
     isAvailable: { type: Boolean, default: false },
     averageRating: { type: Number, default: 0 },
     totalRatings: { type: Number, default: 0 },
+    emergencyContacts: [
+      {
+        _id: false,
+        name: { type: String, required: true },
+        phone: { type: String },
+        email: { type: String },
+      },
+    ],
   },
   { timestamps: true, versionKey: false }
 );
