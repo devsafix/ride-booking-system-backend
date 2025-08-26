@@ -12,7 +12,7 @@ export interface IUser {
   isAvailable?: boolean;
   averageRating?: number;
   totalRatings?: number;
-  emergencyContacts: {
+  emergencyContacts?: {
     name: string;
     phone?: string;
     email?: string;
