@@ -1,10 +1,16 @@
-# Ride Booking API
+# A Fullstack Ride Management System API (Backend)
 
 ## Project Overview
 
 This is a robust and scalable backend API for a ride-booking service, similar to Uber or Pathao. Built using **Node.js**, **Express.js**, and **Mongoose**, the system manages three distinct user roles: **Rider**, **Driver**, and **Admin**. It features secure authentication, complete ride lifecycle management, and role-based access control.
 
 ---
+
+## Live Deployment
+
+- **Frontend:** https://ridaa.vercel.app
+- **Backend:** https://ride-booking-system-backend-by-safi.vercel.app
+- **Frontend Repository:** https://github.com/devsafix/ride-booking-system-client
 
 ## Key Features
 
