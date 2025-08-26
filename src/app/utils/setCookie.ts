@@ -6,6 +6,7 @@ export const setAuthCookie = (res: Response, tokenInfo: string) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
+      domain: "https://ridaa.vercel.app",
       maxAge: 2592000000,
     });
   }
