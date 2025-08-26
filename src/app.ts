@@ -12,6 +12,7 @@ const app: Application = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.set("trust proxy", 1);
 app.use(cors({ origin: envVariables.FRONTEND_URL, credentials: true }));
 
 // all routes
