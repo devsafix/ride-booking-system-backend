@@ -30,7 +30,7 @@ const logout = catchAsync(async (req: Request, res: Response) => {
   res.clearCookie("accessToken", {
     httpOnly: true,
     secure: true,
-    sameSite: "lax",
+    sameSite: "none",
   });
 
   sendResponse(res, {
