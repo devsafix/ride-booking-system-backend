@@ -10,3 +10,14 @@ export const setAuthCookie = (res: Response, tokenInfo: string) => {
     });
   }
 };
+
+export const setRefreshCookie = (res: Response, tokenInfo: string) => {
+  if (tokenInfo) {
+    res.cookie("refreshToken", tokenInfo, {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+      maxAge: 2592000000,
+    });
+  }
+};
