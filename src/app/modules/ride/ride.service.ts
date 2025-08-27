@@ -173,6 +173,19 @@ const rejectRide = async (rideId: string, driverId: string) => {
   if (ride.status !== RideStatus.REQUESTED) {
     throw new AppError(httpStatus.BAD_REQUEST, "Cannot reject at this stage");
   }
+
+  // Check if the driver already has an active ride
+  const existingActiveRide = await Ride.findOne({
+    driver: driverId,
+    status: { $in: activeRideStatuses },
+  });
+  if (existingActiveRide) {
+    throw new AppError(
+      httpStatus.BAD_REQUEST,
+      "You are already on an active ride"
+    );
+  }
+
   // Update the status to rejected
   ride.status = RideStatus.REJECTED;
   await ride.save();
